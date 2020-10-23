@@ -40,6 +40,7 @@ body{
 .header-link a{
   color: #ffffff;
   text-decoration: none;
+  padding: 1rem;
 }
 .header-link a:hover{
   color: #ff8000;
@@ -193,4 +194,53 @@ a:hover{
 }
 .btn-Add-to-cart:hover{
   border: .1rem #404040 solid;
+}
+
+/* Form Sign-In */
+.form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.form-container{
+  display: flex;
+  flex-direction: column;
+  width: 32rem;
+  padding: 2rem;
+  border: .1rem #c0c0c0 solid;
+  border-radius: .5rem;
+  list-style-type: none;
+}
+.form-container li{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.title{
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+}
+input{
+  padding: 1rem;
+  border: .1rem #c0c0c0 solid;
+  border-radius: .5rem;
+}
+.btn-Signin{
+  background-color: #f0c040;
+  padding: 1rem;
+  border: .1rem #808080 solid;
+  cursor: pointer;
+}
+.btn-Register{
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border: .1rem #808080 solid;
+  border-radius: .5rem;
+  text-align: center;
+}
+.btn-Register:hover{
+  color: #ff8000;
 }
