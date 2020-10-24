@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
-import data from '../data'
+import data from '../data.json'
+import axios from 'axios';
 
 export default function HomeScreen(props) {
     return (

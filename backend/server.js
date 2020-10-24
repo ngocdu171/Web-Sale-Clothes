@@ -42,7 +42,7 @@ app.get('/users', function (req, res) {
   })
 })
 
-app.get('/data', function (req, res) {
+app.get('/products', function (req, res) {
     res.send(data.products);
     // res.send("data.products");
 })
