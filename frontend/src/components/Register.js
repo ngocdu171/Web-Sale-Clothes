@@ -9,13 +9,15 @@ export default function Register(props) {
         var password = event.target['password'].value;
         Axios.post('http://localhost:4000/register', {
             username,
-            password,}).then((response) => {
-                if(response.data.message === "Create Success")
+            password})
+            .then((response) => {
+                if(response.data.message === "Create Success!")
                 {
+                    alert("Create Success");
                     props.history.push(props.redirecttoLogin);
                 }
                 else {
-                    alert(response.data.message);
+                    alert("both must be string, username and password must be more than 6 characters long");
                 }
             })
     }

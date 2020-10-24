@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 4000;
+const data = require('./data.json')
 
 const db = require('./db')
 const bodyParser = require('body-parser');
@@ -15,13 +16,14 @@ app.use(bodyParser.json());
 app.use(cors());
 
 passport.use(new Strategy((username, password, cb) => {
-    db.query('SELECT id, username, password FROM users WHERE username = ?', [username]).then(dbResults => {
+    db.query('SELECT id, username, password FROM users WHERE username = ?', [username])
+    .then(dbResults => {
         if(dbResults.length == 0)
         {
             return cb(null, false);
         }
 
-        bcrypt.compare(passport, dbResults[0].passport).then(bcryptResult => {
+        bcrypt.compare(password, dbResults[0].password).then(bcryptResult => {
             if(bcryptResult == true)
             {
                 cb(null, dbResults[0]);
@@ -38,6 +40,11 @@ app.get('/users', function (req, res) {
   db.query('SELECT id, username, password From users').then(results => {
       res.json(results);
   })
+})
+
+app.get('/data', function (req, res) {
+    res.send(data.products);
+    // res.send("data.products");
 })
 
 //////////////Register//////////////
@@ -63,8 +70,13 @@ app.post('/register', (req, res) => {
 })
 
 //////////////Signin//////////////
-app.post('/signin', (req, res) => {
-    res.send("Sign In");
+app.post('/signin', passport.authenticate('basic', {session: false}),
+    (req, res) => {
+        db.query('SELECT id, username FROM users WHERE username = ?', [req.params.username])
+        .then(results => {
+            res.json(results);
+            console.log(results);
+    })
 })
 
 /* DB init */
