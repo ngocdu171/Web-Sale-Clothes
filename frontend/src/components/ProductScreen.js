@@ -1,10 +1,22 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
-import data from '../data';
+import axios from 'axios';
 
 export default function ProductsScreen(props) {
-    console.log(props.match.params.id);//lay id cua product khi click vo product
-    const product = data.products.find(x => x._id === props.match.params.id)
+    var tam = props.match.params.id;
+    const [qty, setQty] = useState("1");
+    // console.log(qty);
+    const [product, setProduct] = useState([]);
+    useEffect(() => {
+            axios.get('http://localhost:4000/products/' + tam)
+            .then((response) => {
+                const {data} = response;
+                setProduct(data);
+        })
+        return () => {
+            //
+        }
+    }, [])
     return (
         <div>
             <div className="back-to-homepage">
@@ -39,20 +51,20 @@ export default function ProductsScreen(props) {
                             Status: {product.status}
                         </li>
                         <li>
-                            Qty: <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                            Qty: <select onChange={(event) => {setQty(event.target.value);}}>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
                             </select>
                         </li>
                         <li>
-                            <button className="btn-Add-to-cart">Add to Cart</button>
+                            <button className="btn-Add-to-cart"><Link to={"/cart/" + product._id}>Add to Cart</Link></button>
                         </li>
                     </ul>
                 </div>
             </div>
-            
         </div>
     )
 }

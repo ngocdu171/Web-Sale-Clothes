@@ -5,6 +5,7 @@ import HomeScreen from './components/HomeScreen';
 import ProductScreen from './components/ProductScreen';
 import Signin from './components/Signin';
 import Register from './components/Register';
+import CartScreen from './components/CartScreen';
 
 class App extends Component {
     constructor(props) {
@@ -71,6 +72,7 @@ class App extends Component {
                                                                             redirecttoHome="/" {...routeProps} />} />
                             <Route path="/register" render={ routeProps => <Register redirecttoLogin="/signin" {...routeProps} />}/>
                             <Route path="/product/:id" component={ProductScreen} />
+                            <Route path="/cart/:id?" render={ routeProps => <CartScreen redirecttoXXX="/" {...routeProps} />}/>
                             <Route path="/" exact={true} component={HomeScreen} />
                         </div>
                     </main>
