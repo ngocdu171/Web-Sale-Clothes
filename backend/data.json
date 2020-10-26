@@ -10,7 +10,7 @@
             "rating": 4.5,
             "numReviews": 10,
             "description": "Nice Shirt",
-            "status": "In Stock"
+            "countInStock": 6
         },
         {
             "_id": "2",
@@ -22,7 +22,7 @@
             "rating": 4.2,
             "numReviews": 5,
             "description": "Nice Shirt",
-            "status": "Out of Stock"
+            "countInStock": 0
         },
         {
             "_id": "3",
@@ -34,7 +34,7 @@
             "rating": 4.5,
             "numReviews": 8,
             "description": "Nice Pant",
-            "status": "In Stock"
+            "countInStock": 6
         },
         {
             "_id": "4",
@@ -46,7 +46,7 @@
             "rating": 4.5,
             "numReviews": 8,
             "description": "Nice Pant",
-            "status": "In Stock"
+            "countInStock": 6
         },
         {
             "_id": "5",
@@ -58,7 +58,7 @@
             "rating": 4.5,
             "numReviews": 8,
             "description": "Nice Pant",
-            "status": "Out of Stock"
+            "countInStock": 0
         }
     ]
 }

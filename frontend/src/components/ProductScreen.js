@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function ProductsScreen(props) {
-    var tam = props.match.params.id;
-    const [qty, setQty] = useState("1");
-    // console.log(qty);
+    const [qty, setQty] = useState(1);
     const [product, setProduct] = useState([]);
     useEffect(() => {
+        var tam = props.match.params.id;
             axios.get('http://localhost:4000/products/' + tam)
             .then((response) => {
                 const {data} = response;
@@ -16,7 +15,11 @@ export default function ProductsScreen(props) {
         return () => {
             //
         }
-    }, [])
+    }, []);
+
+    const AddtoCart = () => {
+        props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+    }
     return (
         <div>
             <div className="back-to-homepage">
@@ -48,19 +51,22 @@ export default function ProductsScreen(props) {
                             Price: {product.price}
                         </li>
                         <li>
-                            Status: {product.status}
+                            Status: {product.countInStock > 0 ?"In stock": "Out of Stock"}
                         </li>
                         <li>
-                            Qty: <select onChange={(event) => {setQty(event.target.value);}}>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                            Qty: <select 
+                                    value={qty}
+                                    onChange={(event) => {setQty(event.target.value);}}>
+                                    {[...Array(product.countInStock).keys()].map(x =>
+                                        <option key={x+1} value={x + 1}>{x + 1}</option>
+                                    )}
                             </select>
                         </li>
                         <li>
-                            <button className="btn-Add-to-cart"><Link to={"/cart/" + product._id}>Add to Cart</Link></button>
+                            {product.countInStock > 0 && <button 
+                                onClick={AddtoCart}
+                                className="btn-Add-to-cart">Add to Cart</button>
+                            }
                         </li>
                     </ul>
                 </div>
