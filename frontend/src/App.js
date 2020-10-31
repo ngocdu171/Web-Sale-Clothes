@@ -17,6 +17,7 @@ class App extends Component {
         }
         this.Signin = this.Signin.bind(this);
         this.SigninFail = this.SigninFail.bind(this);
+        this.Cart = this.Cart.bind(this);
     }
     
     openMenu() {
@@ -25,8 +26,20 @@ class App extends Component {
     closeMenu() {
         document.querySelector(".sidebar").classList.remove("open");
     }
-    Cart() {
-        console.log("adsadasd");
+    Cart(item) {
+        console.log(item);
+        let {items} = this.state;
+        items.push({
+            id: item.id,
+            name: item.name,
+            image: item.image,
+            price: item.price,
+            countInStock: item.countInStock,
+            qty: item.qty
+        });
+        this.setState({
+            items: items
+        })
     }
 
     Signin(result) {
@@ -40,6 +53,9 @@ class App extends Component {
         alert("Signin Fail");
     }
     render() {
+        let items = this.state.items
+        console.log(items);
+        console.log(items.length);
         return (
             <BrowserRouter>
                 <div className="grid-container">

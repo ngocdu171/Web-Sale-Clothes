@@ -19,7 +19,14 @@ export default function ProductsScreen(props) {
 
     const AddtoCart = () => {
         props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
-        props.onclickCart();
+        let item = {id: product._id,
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            countInStock: product.countInStock,
+            qty
+        }
+        props.onclickCart(item);
     }
     return (
         <div>

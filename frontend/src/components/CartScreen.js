@@ -5,25 +5,37 @@ import {Link} from 'react-router-dom';
 export default function CartScreen(props) {
     const productId = props.match.params.id;
     const qty = props.location.search? Number(props.location.search.split("=")[1]):1;
-    const [product, setProduct] = useState("");
-    console.log("quantity: " + qty);
-    console.log("productId " + productId);
+    // const [product, setProduct] = useState("");
+    const [product, setProduct] = useState([]);
+    // console.log("quantity: " + qty);
+    // console.log("productId " + productId);
     var array = [];
     useEffect(() => {
         if(productId) {
             Axios('http://localhost:5000/products/' + productId)
             .then((response) => {
                 const {data} = response;
-                setProduct(data);
+                // setProduct(data, qty);
+                // console.log(response);
+                // console.log("--------------");
+                setProduct({id: response.data._id,
+                            name: response.data.name,
+                            image: response.data.image,
+                            price: response.data.price,
+                            countInStock: response.data.countInStock,
+                            qty
+                            })
             })
         }
         return () => {
             //
         }
     }, [])
-    console.log(product);
-    array.push({product});
-    console.log(array);
+    // console.log(product);
+    // array.push({product});
+    // console.log(array);
+    // // setProduct(array);
+    // console.log(array.product);
     const removeItem = (tam) => {
         alert("removeItem " + tam);
     }
