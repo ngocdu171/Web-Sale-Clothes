@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const port = 4000;
-const data = require('./data.json')
+const port = 5000;
+const data = require('./data.json');
 
-const db = require('./db')
+const db = require('./db');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');

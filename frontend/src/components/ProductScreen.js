@@ -7,7 +7,7 @@ export default function ProductsScreen(props) {
     const [product, setProduct] = useState([]);
     useEffect(() => {
         var tam = props.match.params.id;
-            axios.get('http://localhost:4000/products/' + tam)
+            axios.get('http://localhost:5000/products/' + tam)
             .then((response) => {
                 const {data} = response;
                 setProduct(data);
@@ -18,7 +18,8 @@ export default function ProductsScreen(props) {
     }, []);
 
     const AddtoCart = () => {
-        props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+        props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
+        props.onclickCart();
     }
     return (
         <div>

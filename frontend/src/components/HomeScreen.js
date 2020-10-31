@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function HomeScreen(props) {
     const [products, setProduct] = useState([]);
     useEffect(() => {
-            axios.get('http://localhost:4000/products')
+            axios.get('http://localhost:5000/products')
             .then((response) => {
                 const {data} = response;
                 setProduct(data);

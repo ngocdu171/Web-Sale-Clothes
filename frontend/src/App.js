@@ -11,6 +11,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            items: [],
             SignedIn: false,
             userInfo: null
         }
@@ -23,6 +24,9 @@ class App extends Component {
     }
     closeMenu() {
         document.querySelector(".sidebar").classList.remove("open");
+    }
+    Cart() {
+        console.log("adsadasd");
     }
 
     Signin(result) {
@@ -71,7 +75,7 @@ class App extends Component {
                                                                             SigninFail = {this.SigninFail}
                                                                             redirecttoHome="/" {...routeProps} />} />
                             <Route path="/register" render={ routeProps => <Register redirecttoLogin="/signin" {...routeProps} />}/>
-                            <Route path="/product/:id" component={ProductScreen} />
+                            <Route path="/product/:id" render={ routeProps => <ProductScreen onclickCart={this.Cart} {...routeProps} />}/>
                             <Route path="/cart/:id?" render={ routeProps => <CartScreen redirecttoXXX="/" {...routeProps} />}/>
                             <Route path="/" exact={true} component={HomeScreen} />
                         </div>
