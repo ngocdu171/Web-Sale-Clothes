@@ -1,23 +1,23 @@
 import axios from 'axios';
 
 let userInfo = {
-  username: null,
+  email: null,
   password: null
 }
 
 let myAuth = {
-    authenticate: (username, password) => {
+    authenticate: (email, password) => {
         return new Promise((resolve, reject) => {
             axios.get('http://localhost:5000/signin',
             {
                 auth: {
-                username: username,
+                email: email,
                 password: password
                 }
             })
             .then(result => {
                 userInfo = {
-                username: username,
+                email: email,
                 password: password
                 }
                 resolve(result);

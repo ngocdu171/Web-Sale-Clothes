@@ -5,9 +5,9 @@ import { Link, Redirect } from 'react-router-dom';
 export default function Signin(props) {
     function signin(event) {
         event.preventDefault();
-        var username = event.target['username'].value;
+        var email = event.target['email'].value;
         var password = event.target['password'].value;
-        Auth.authenticate(username,password)
+        Auth.authenticate(email,password)
         .then(result => {
             props.SigninSuccess(result);
             props.history.push(props.redirecttoHome);
@@ -22,8 +22,8 @@ export default function Signin(props) {
                 <ul className="form-container">
                     <li className="title">Sign-In</li>
                     <li>
-                        <label>Username</label>
-                        <input type="text" id="username" name="username"></input>
+                        <label>Email</label>
+                        <input type="email" id="email" name="email"></input>
                     </li>
                     <li>
                         <label>Password</label>

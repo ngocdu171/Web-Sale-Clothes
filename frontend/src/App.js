@@ -92,7 +92,9 @@ class App extends Component {
                                                                             redirecttoHome="/" {...routeProps} />} />
                             <Route path="/register" render={ routeProps => <Register redirecttoLogin="/signin" {...routeProps} />}/>
                             <Route path="/product/:id" render={ routeProps => <ProductScreen onclickCart={this.Cart} {...routeProps} />}/>
-                            <Route path="/cart/:id?" render={ routeProps => <CartScreen redirecttoXXX="/" {...routeProps} />}/>
+                            <Route path="/cart/:id?" render={ routeProps => <CartScreen 
+                                                                                Cart= {this.state.items}
+                                                                                redirecttoXXX="/" {...routeProps} />}/>
                             <Route path="/" exact={true} component={HomeScreen} />
                         </div>
                     </main>

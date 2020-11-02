@@ -6,10 +6,10 @@ export default function Register(props) {
     function register(event) {
         event.preventDefault();
         var username = event.target['username'].value;
+        var email = event.target['email'].value;
         var password = event.target['password'].value;
-        Axios.post('http://localhost:4000/register', {
-            username,
-            password})
+            Axios.post('http://localhost:5000/register', {
+            username,email,password})
             .then((response) => {
                 if(response.data.message === "Create Success!")
                 {
@@ -27,12 +27,16 @@ export default function Register(props) {
                 <ul className="form-container">
                     <li className="title">Create Account</li>
                     <li>
-                        <label>Username</label>
-                        <input type="text" id="username" name="username"></input>
+                        <label>Your Name</label>
+                        <input type="text" id="username" name="username" placeholder="Your Name"></input>
+                    </li>
+                    <li>
+                        <label>Email</label>
+                        <input type="email" id="email" name="email" placeholder="Email"></input>
                     </li>
                     <li>
                         <label>Password</label>
-                        <input type="password" id="password" name="password"></input>
+                        <input type="password" id="password" name="password" placeholder="Password"></input>
                     </li>
                     <li>
                         <button type="submit" className="btn-Signin">Register</button>

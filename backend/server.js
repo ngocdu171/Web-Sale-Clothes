@@ -15,8 +15,8 @@ const saltRound = 4;
 app.use(bodyParser.json());
 app.use(cors());
 
-passport.use(new Strategy((username, password, cb) => {
-    db.query('SELECT id, username, password FROM users WHERE username = ?', [username])
+passport.use(new Strategy((email, password, cb) => {
+    db.query('SELECT id, username, email, password FROM users WHERE username = ?', [email])
     .then(dbResults => {
         if(dbResults.length == 0)
         {
@@ -37,7 +37,7 @@ passport.use(new Strategy((username, password, cb) => {
 }))
 
 app.get('/users', function (req, res) {
-  db.query('SELECT id, username, password From users').then(results => {
+  db.query('SELECT * From users').then(results => {
       res.json(results);
   })
 })
@@ -60,11 +60,13 @@ app.get('/products/:id', function (req, res) {
 //////////////Register//////////////
 app.post('/register', (req, res) => {
     let username = req.body.username.trim();
+    let email = req.body.email.trim();
     let password = req.body.password.trim();
     if((typeof username === "string") && (username.length > 5) &&
+        (typeof email === "string") && (email.length > 5 && email.length < 61) &&
         (typeof password === "string") && (password.length > 5)) {
             bcrypt.hash(password, saltRound).then(hash =>
-                db.query('INSERT INTO users (username, password) VALUES (?,?)', [username, hash])
+                db.query('INSERT INTO users (username, email, password) VALUES (?,?,?)', [username, email, hash])
             )
             .then(dbResults => {
                 console.log(dbResults);
@@ -82,7 +84,7 @@ app.post('/register', (req, res) => {
 //////////////Signin//////////////
 app.post('/signin', passport.authenticate('basic', {session: false}),
     (req, res) => {
-        db.query('SELECT id, username FROM users WHERE username = ?', [req.params.username])
+        db.query('SELECT id, username FROM users WHERE username = ?', [req.params.email])
         .then(results => {
             res.json(results);
             console.log(results);
@@ -94,9 +96,18 @@ Promise.all(
     [
         db.query(`CREATE TABLE IF NOT EXISTS users(
             id INT AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(32) UNIQUE, 
+            username VARCHAR(32) UNIQUE,
+            email VARCHAR(80),
             password VARCHAR(256)
         )`),
+        // db.query(`CREATE TABLE IF NOT EXISTS cart(
+        //     id INT,
+        //     username VARCHAR(32),
+        //     date VARCHAR(55),
+        //     location VARCHAR(55),
+        //     energy FLOAT(3) DEFAULT '0',
+        //     money FLOAT(3)
+        // )`)
     ]
   ).then(() => {
     console.log('database initialized');
