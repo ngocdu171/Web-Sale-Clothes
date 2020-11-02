@@ -8,7 +8,7 @@ let userInfo = {
 let myAuth = {
     authenticate: (email, password) => {
         return new Promise((resolve, reject) => {
-            axios.get('http://localhost:5000/signin',
+            axios.get('http://localhost:5000/singin/' + email,
             {
                 auth: {
                 email: email,

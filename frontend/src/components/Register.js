@@ -28,15 +28,15 @@ export default function Register(props) {
                     <li className="title">Create Account</li>
                     <li>
                         <label>Your Name</label>
-                        <input type="text" id="username" name="username" placeholder="Your Name"></input>
+                        <input type="text" id="username" name="username" placeholder="Your Name..." />
                     </li>
                     <li>
                         <label>Email</label>
-                        <input type="email" id="email" name="email" placeholder="Email"></input>
+                        <input type="email" id="email" name="email" placeholder="Email..." />
                     </li>
                     <li>
                         <label>Password</label>
-                        <input type="password" id="password" name="password" placeholder="Password"></input>
+                        <input type="password" id="password" name="password" placeholder="Password..." />
                     </li>
                     <li>
                         <button type="submit" className="btn-Signin">Register</button>

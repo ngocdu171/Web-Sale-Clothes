@@ -23,11 +23,11 @@ export default function Signin(props) {
                     <li className="title">Sign-In</li>
                     <li>
                         <label>Email</label>
-                        <input type="email" id="email" name="email"></input>
+                        <input type="email" id="email" name="email" placeholder="Email..." />
                     </li>
                     <li>
                         <label>Password</label>
-                        <input type="password" id="password" name="password"></input>
+                        <input type="password" id="password" name="password" placeholder="Password..." />
                     </li>
                     <li>
                         <button type="submit" className="btn-Signin">Sign In</button>

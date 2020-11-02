@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 passport.use(new Strategy((email, password, cb) => {
-    db.query('SELECT id, username, email, password FROM users WHERE username = ?', [email])
+    db.query('SELECT id, username, email, password FROM users WHERE email = ?', [email])
     .then(dbResults => {
         if(dbResults.length == 0)
         {
@@ -82,14 +82,33 @@ app.post('/register', (req, res) => {
 })
 
 //////////////Signin//////////////
-app.post('/signin', passport.authenticate('basic', {session: false}),
+// app.post('/signin', passport.authenticate('basic', {session: false}),
+//     (req, res) => {
+//         db.query('SELECT id, email FROM users WHERE email = ?', [req.params.email])
+//         .then(results => {
+//             res.json(results);
+//             console.log(results);
+//     })
+// })
+
+// app.post('/signin/:email', passport.authenticate('basic', {session: false}),
+//     (req, res) => {
+//         db.query('SELECT id, email FROM users WHERE email = ?', [req.params.email])
+//         .then(results => {
+//             res.json(results);
+//             console.log(results);
+//     })
+// });
+
+app.get('/signin/:email', passport.authenticate('basic', {session: false}),
     (req, res) => {
-        db.query('SELECT id, username FROM users WHERE username = ?', [req.params.email])
-        .then(results => {
+        db.query('SELECT id, username, email FROM users WHERE email = ?',
+        [req.params.email])
+        .then (results => {
             res.json(results);
             console.log(results);
-    })
-})
+        })
+});
 
 /* DB init */
 Promise.all(
